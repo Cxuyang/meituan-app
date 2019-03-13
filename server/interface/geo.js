@@ -94,7 +94,7 @@ router.get('/city', async (ctx) => {
   }
 })
 
-router.get('hotCity', async (ctx) => {
+router.get('/hotCity', async (ctx) => {
   // let list = [ '北京市', '上海市', '广州市', '深圳市', '天津市', '西安市', '杭州市', '南京市', '武汉市', '成都市']
   // let result = await City.find()
   // let nList = []
@@ -104,7 +104,7 @@ router.get('hotCity', async (ctx) => {
   // ctx.body = {
   //   hots: nList
   // }
-  let {status, data: {hots}} = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`)
+  let {status, data: {hots}} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
   if (status === 200) {
     ctx.body = {
       hots

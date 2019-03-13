@@ -144,6 +144,6 @@ export default {
   }
 }
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 @import '../assets/css/register/index.scss';
 </style>

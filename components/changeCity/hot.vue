@@ -21,6 +21,6 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/css/changeCity/hot.scss";
 </style>
