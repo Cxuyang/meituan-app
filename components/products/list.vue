@@ -4,8 +4,8 @@
       <dd
         v-for="item in nav"
         :key="item.name"
-        :class="[item.name,item.acitve?'s-nav-active':'']"
-        @click="navSelect"
+        :class="[item.name,item.active?'s-nav-active':'']"
+        @click="navSelect(item)"
       >{{ item.txt }}</dd>
     </dl>
     <ul>
@@ -37,7 +37,7 @@ export default {
         {
           name: 's-default',
           txt: '智能排序',
-          acitve: true
+          active: true
         }, {
           name: 's-price',
           txt: '价格最低',
@@ -59,8 +59,20 @@ export default {
     return { items: data.list }
   },
   methods: {
-    navSelect: function () {
-      console.log('select')
+    navSelect: function (target) {
+      this.nav.map(item => item.active = false)
+      target.active = true
+      let _sortFild = ''
+      if (target.txt == '智能排序') {
+        _sortFild = 'comment'
+      } else if (target.txt == '价格最低') {
+        _sortFild = 'price'
+      } else if (target.txt == '人气最高') {
+        _sortFild = 'comment'
+      } else if (target.txt == '评价最高') {
+        _sortFild = 'rate'
+      }
+      this.list.sort((a, b) => b[_sortFild] - a[_sortFild])
     }
   }
 }
