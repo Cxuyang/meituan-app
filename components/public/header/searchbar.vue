@@ -18,7 +18,7 @@
             @focus="focus"
             @blur="blur"
             @input="input"/>
-          <button class="el-button el-button--primary"><i class="el-icon-search"/></button>
+          <button class="el-button el-button--primary" @click="searchByKeyword"><i class="el-icon-search"/><a :href="'/products?keyword='+encodeURIComponent(search)"/></button>
           <dl
             v-if="isHotPlace"
             class="hotPlace">
@@ -106,7 +106,10 @@ export default {
     // 防抖动
     input: _.debounce(async () => {
       let _this = this
-    }, 300)
+    }, 300),
+    searchByKeyword() {
+      this.$router.push({path: 'products', query: {keyword: this.search}})
+    }
   }
 }
 </script>
