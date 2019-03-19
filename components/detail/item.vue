@@ -34,8 +34,24 @@ export default {
   methods: {
     createCart: async function() {
       let _this = this
-      //let {status, data: {code, id}} = await this.$axios.post('/cart/')
-
+      let {status, data: {code, id}} = await this.$axios.post('/cart/create', {
+        params: {
+          id: Math.random().toString().slice(3, 9),
+          detail: {
+            name: _this.meta.name,
+            price: _this.meta.biz_ext.cost,
+            imgs: _this.meta.photos
+          }
+        }
+      })
+      if (status === 200 && code === 0) {
+        window.location.href = `/cart/?id=${id}`
+      } else {
+        _this.$message({
+          type: 'warning',
+          message: '服务出错'
+        })
+      }
     }
   }
 }
