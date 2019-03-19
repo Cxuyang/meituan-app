@@ -84,6 +84,7 @@ router.get('/products', async (ctx) => {
       sign
     }
   })
+  // passport 登录验证 ctx.isAuthenticated()
   if (status === 200) {
     ctx.body = {
       product,
