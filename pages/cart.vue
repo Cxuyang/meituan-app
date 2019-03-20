@@ -32,23 +32,35 @@ export default {
       return total
     }
   },
+  async asyncData(ctx) {
+    let {status, data: {code, data: {name, price}}} = await ctx.$axios.post('/cart/getCart', {
+      id: ctx.query.id
+    })
+    if (status === 200 && code === 0 && name) {
+      return {
+        cart: [{
+          name,
+          price,
+          count: 1
+        }],
+        cartNo: ctx.query.id
+      }
+    }
+  },
   methods: {
     async submit() {
-      console.log('submit')
-    },
-    async asyncData(ctx) {
-      let {status, data: {code, data: {name, price}}} = await ctx.$axios.post('./cart/getCart', {
-        id: ctx.query.id
+      let {status, data: {code, id}} = await this.$axios.post('/order/createOrder', {
+        count: this.cart[0].count,
+        price: this.cart[0].price,
+        id: this.cartNo
       })
-      if (status === 200 && code === 0 && name) {
-        return {
-          cart: [{
-            name,
-            price,
-            count: 1
-          }],
-          cartNo: ctx.query.query.id
-        }
+      if (status === 200 && code === 0) {
+        this.$alert(`恭喜您, 已成功下单, 订单号: ${id}`, '下单成功', {
+          confirmButtonText: '确认',
+          callback: action => {
+            location.href = '/order'
+          }
+        })
       }
     }
   }

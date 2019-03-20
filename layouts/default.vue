@@ -25,4 +25,7 @@ export default {
 .total-container {
   background-color: #F8F8F8;
 }
+.el-main {
+  width: 1190px
+}
 </style>

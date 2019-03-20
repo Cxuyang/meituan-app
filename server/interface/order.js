@@ -4,7 +4,7 @@ import Cart from '../dbs/models/cart'
 import Order from '../dbs/models/order'
 import md5 from 'crypto-js/md5'
 
-let router = new Router({prefix: order})
+let router = new Router({prefix: '/order'})
 
 router.post('/createOrder', async (ctx) => {
   let {id, price, count} = ctx.request.body
